@@ -4,6 +4,8 @@ Hold Alt while drawing to increase track and route-waypoint snapping strength by
 
 The game snaps the cursor to existing track nodes and lines within `PIXEL_SNAP_THRESHOLD` screen pixels (default 10). While Alt is held, this mod sets it to 100 px, and restores 10 px on release, on window blur or when the window is hidden.
 
+This mod is already packaged with the Japanese Trains Mod (https://github.com/kaicardenas0618/japanese-trains), do not install this mod if you already have JP Trains
+
 ## Notes
 - The game already uses Alt as the road snap toggle, so road snapping flips while Alt is held. To avoid this, change `HOLD_KEY` at the top of `index.js` (for example to `Control`).
 - The tutorial uses a fixed 30 px track snap radius and ignores this setting.
