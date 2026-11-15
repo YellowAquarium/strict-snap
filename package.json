@@ -1,0 +1,19 @@
+{
+  "name": "strict-snap",
+  "version": "v1.0.0",
+  "description": "Hold Alt to increase track and waypoint snapping strength by 10x in Subway Builder.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/hold.test.cjs"
+  },
+  "keywords": [
+    "subway-builder",
+    "mod"
+  ],
+  "author": "YellowAquarium",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YellowAquarium/strict-snap"
+  }
+}

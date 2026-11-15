@@ -1,0 +1,17 @@
+const vm=require('vm'),fs=require('fs');
+const L={}; const calls=[];
+const win={addEventListener:(t,f,c)=>{(L[t]=L[t]||[]).push(f)}, SubwayBuilderAPI:{hooks:{onMapReady:(f)=>{win.__ready=f}}, modifyConstants:(c)=>calls.push(JSON.stringify(c))}};
+const doc={hidden:false,addEventListener:(t,f)=>{(L['doc:'+t]=L['doc:'+t]||[]).push(f)}};
+const ctx={window:win,document:doc,console:{log(){},warn(){},error:console.error}}; ctx.globalThis=ctx;
+vm.runInNewContext(fs.readFileSync(__dirname+"/../index.js","utf8"),ctx);
+win.__ready(); win.__ready();
+const fire=(t,e)=>(L[t]||[]).forEach(f=>f(e));
+const exp=(n,want)=>{ if(JSON.stringify(calls.slice(n.from))!==JSON.stringify(want)) {console.log('FAIL',n.name,calls.slice(n.from),want);process.exitCode=1} else console.log('ok',n.name)};
+let n=calls.length;
+fire('keydown',{key:'Alt',repeat:false}); fire('keydown',{key:'Alt',repeat:true}); exp({name:'hold once',from:n},['{"PIXEL_SNAP_THRESHOLD":100}']);
+n=calls.length; fire('keyup',{key:'Alt'}); exp({name:'release',from:n},['{"PIXEL_SNAP_THRESHOLD":10}']);
+n=calls.length; fire('keydown',{key:'Shift',repeat:false}); fire('keyup',{key:'a'}); exp({name:'other keys ignored',from:n},[]);
+n=calls.length; fire('keydown',{key:'Alt',repeat:false}); fire('blur',{}); exp({name:'blur releases',from:n},['{"PIXEL_SNAP_THRESHOLD":100}','{"PIXEL_SNAP_THRESHOLD":10}']);
+n=calls.length; fire('mousemove',{altKey:true}); fire('mousemove',{altKey:true}); fire('mousemove',{altKey:false}); exp({name:'mousemove sync',from:n},['{"PIXEL_SNAP_THRESHOLD":100}','{"PIXEL_SNAP_THRESHOLD":10}']);
+n=calls.length; fire('keydown',{key:'Alt',repeat:false}); doc.hidden=true; fire('doc:visibilitychange',{}); exp({name:'hidden releases',from:n},['{"PIXEL_SNAP_THRESHOLD":100}','{"PIXEL_SNAP_THRESHOLD":10}']);
+console.log('init listeners', Object.fromEntries(Object.entries(L).map(([k,v])=>[k,v.length])));
