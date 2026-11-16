@@ -1,8 +1,8 @@
 {
   "id": "strict-snap",
   "name": "Strict Snap",
-  "description": "Hold Alt to increase track and waypoint snapping strength by 10x.",
-  "version": "1.0.0",
+  "description": "Toolbar button that toggles 10x track and waypoint snapping strength.",
+  "version": "1.1.0",
   "author": {
     "name": "YellowAquarium",
     "url": "https://github.com/YellowAquarium"
