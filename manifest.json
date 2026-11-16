@@ -1,7 +1,7 @@
 {
   "id": "strict-snap",
   "name": "Strict Snap",
-  "description": "Toolbar button that toggles 10x track and waypoint snapping strength.",
+  "description": "Toolbar button toggle or Alt hold for 10x track and waypoint snapping strength.",
   "version": "1.1.0",
   "author": {
     "name": "YellowAquarium",

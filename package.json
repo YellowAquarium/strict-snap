@@ -1,7 +1,7 @@
 {
   "name": "strict-snap",
   "version": "v1.1.0",
-  "description": "Toolbar button that toggles 10x track and waypoint snapping strength in Subway Builder.",
+  "description": "Toolbar button toggle or Alt hold for 10x track and waypoint snapping strength in Subway Builder.",
   "main": "index.js",
   "scripts": {
     "test": "node test/toggle.test.cjs"
